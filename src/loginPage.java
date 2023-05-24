@@ -12,7 +12,7 @@ public class loginPage extends  AccountGUI{
     JTextField text = new JTextField();
     JButton logBtn = new JButton("Login");
     JButton savingsBtn = new JButton("Savings");
-    JButton currBtn = new JButton("Current");
+    JButton CurrentBtn = new JButton("Current");
    // JLabel or = new JLabel("Or");
 
 
