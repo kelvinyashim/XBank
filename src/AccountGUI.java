@@ -123,7 +123,7 @@ public class AccountGUI {
                             fileWriterMain.writeBalance(previousBalance, myAcc.getBalance(),"Deposit");
                             fileWriterMain.readFromFile();
                             // Show success message
-                            JOptionPane.showMessageDialog(null, "Amount deposited: " + amount);
+                            JOptionPane.showMessageDialog(null, "Amount Withdrew: " + amount);
                         } catch (NumberFormatException exception) {
                             JOptionPane.showMessageDialog(null, "Invalid input!");
                         }
