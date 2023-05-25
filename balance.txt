@@ -1,5 +1,5 @@
-16:36:57.199678500
-Date: 2023-05-22
+15:07:27.761326500
+Date: 2023-05-24
 Transaction Type: Deposit
 Previous Balance: 100000.0
-Current Balance: 106666.0
+Current Balance: 105000.0
