@@ -197,7 +197,41 @@ public class AccountGUI {
                     }
                 });
 
+                withdrawbtn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        frame3.getContentPane().add(dLabel);
+                        frame3.add(myText);
+                        frame3.add(calcDepositBtn);
+                        frame3.setSize(200, 200);
+                        frame3.setLayout(new GridLayout(3, 1));
+                        frame3.setVisible(true);
 
+                        calcWithdrawBtn.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                FileWriterMain fileWriterMain = new FileWriterMain();
+                                try{
+                                    float amount = Float.parseFloat(myText.getText());
+
+
+                                    float previousBalance = myAcc.getBalance();
+
+
+                                    myAcc.withdraw(amount);
+
+
+                                    fileWriterMain.writeBalance(previousBalance, myAcc.getBalance(), "Withdraw");
+                                    fileWriterMain.readFromFile();
+
+                                    JOptionPane.showMessageDialog(null, "Amount withdrawn: " + amount);
+                                }catch (NumberFormatException exception){
+                                    JOptionPane.showMessageDialog(null, "Invalid number!");
+                                }
+                            }
+                        });
+                    }
+                });
             }
 
         });
