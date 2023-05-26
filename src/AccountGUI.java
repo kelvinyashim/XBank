@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import static java.lang.ProcessHandle.current;
 
@@ -23,9 +22,9 @@ public class AccountGUI {
     JFrame frame3 = new JFrame("Current");
     JLabel dlabel = new JLabel("Deposit:");
     JButton CurrentBtn = new JButton("Current");
-    JButton Withdrawbtn = new JButton("Withdraw");
 
-    JButton calcwithdrawbtn = new JButton("Withdraw");
+    JButton WithdrawBtn = new JButton("Withdraw");
+    JButton calcWithdrawBtn = new JButton("Withdraw");
     JTextField myText1 = new JTextField();
     JButton DepositBtn = new JButton("Deposit");
     JButton CalcDepositBtn = new JButton("Deposit");
@@ -98,35 +97,36 @@ public class AccountGUI {
                     withdrawbtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            frame1.getContentPane().add(dLabel);
-                            frame1.add(myText);
-                            frame1.add(calcwithdrawbtn);
-                            frame1.setSize(200, 200);
-                            frame1.setLayout(new GridLayout(3, 1));
-                            frame1.setVisible(true);
+                            frame2.getContentPane().add(dLabel);
+                            frame2.add(myText);
+                            frame2.add(calcDepositBtn);
+                            frame2.setSize(200, 200);
+                            frame2.setLayout(new GridLayout(3, 1));
+                            frame2.setVisible(true);
 
-                            calcwithdrawbtn.addActionListener(new ActionListener() {
+                            calcWithdrawBtn.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     FileWriterMain fileWriterMain = new FileWriterMain();
+
                                     try{
                                         float amount = Float.parseFloat(myText.getText());
 
-                                        // Store previous balance
+
                                         float previousBalance = myAcc.getBalance();
 
-                                        // Perform deposit
+
                                         myAcc.withdraw(amount);
 
-                                        fileWriterMain.writeBalance(previousBalance, myAcc.getBalance(), "Withdrawn");
+                                        fileWriterMain.writeBalance(previousBalance, myAcc.getBalance(), "Withdraw");
                                         fileWriterMain.readFromFile();
-                                        // Show success message
-                                        JOptionPane.showMessageDialog(null, "Amount withdrawn: " + amount);
-                                    }
-                                    catch (NumberFormatException ioException ) {
 
+                                        JOptionPane.showMessageDialog(null, "Amount withdraw: " + amount);
+
+                                    }catch (NumberFormatException exception){
                                         JOptionPane.showMessageDialog(null, "Invalid input!");
-                                    };
+                                    }
+
                                 }
                             });
                         }
@@ -138,7 +138,16 @@ public class AccountGUI {
 
         }
 
-
+    public void openAccountFrame2() {
+        Current current = new Current(100000);
+        account.add(savingsBtn);
+        account.add(CurrentBtn);
+        account.setSize(200, 200);
+        account.setLayout(new GridLayout(2, 1));
+        account.setVisible(true);
+        savings();
+        Current();
+    }
     public void Current() {
         CurrentBtn.addActionListener(new ActionListener() {
             @Override
@@ -183,42 +192,7 @@ public class AccountGUI {
                                 }
                             }
                         });
-                withdrawbtn.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        frame3.getContentPane().add(dLabel);
-                        frame3.add(myText);
-                        frame3.add(calcwithdrawbtn);
-                        frame3.setSize(200, 200);
-                        frame3.setLayout(new GridLayout(3, 1));
-                        frame3.setVisible(true);
 
-                        calcwithdrawbtn.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                FileWriterMain fileWriterMain = new FileWriterMain();
-                                try{
-                                    float amount = Float.parseFloat(myText.getText());
-
-                                    float previousBalance = myAcc.getBalance();
-
-                                    myAcc.withdraw(amount);
-
-                                    fileWriterMain.writeBalance(previousBalance, myAcc.getBalance(), "Withdraw");
-                                    fileWriterMain.readFromFile();
-
-                                }catch (NumberFormatException exception) {
-                                    JOptionPane.showMessageDialog(null, "Invalid input!");
-
-                                }
-
-
-                            }
-                        });
-
-
-                    }
-                });
 
                     }
                 });
